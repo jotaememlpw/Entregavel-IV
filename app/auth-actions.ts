@@ -1,4 +1,3 @@
-/** Aqui vai ser implementado as funções de entrar, cadastrar e sair */
 "use server";
 
 import { redirect } from "next/navigation";
@@ -10,9 +9,19 @@ export async function entrar(email: string, senha: string): Promise<Resultado> {
   const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
 
   if (error) {
-    return { sucesso: false, mensagem: "E-mail ou senha inválidos." };
+    return { sucesso: false, mensagem: traduzirErro(error.message) };
   }
   return { sucesso: true, mensagem: "Login realizado!" };
+}
+
+function traduzirErro(mensagem: string): string {
+  if (mensagem.includes("Invalid login credentials")) {
+    return "E-mail ou senha inválidos.";
+  }
+  if (mensagem.includes("Email not confirmed")) {
+    return "Este e-mail ainda não foi confirmado.";
+  }
+  return mensagem;
 }
 
 export async function cadastrar(email: string, senha: string): Promise<Resultado> {
