@@ -4,7 +4,7 @@ import { sair } from "../auth-actions";
 
 
 
-
+export const dynamic = "force-dynamic";
 export default function PainelLayout({ children }: { children: ReactNode }) {
   return (
     <>
