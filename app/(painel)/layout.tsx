@@ -2,6 +2,9 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { sair } from "../auth-actions";
 
+
+
+
 export default function PainelLayout({ children }: { children: ReactNode }) {
   return (
     <>
